@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-interface AdminAccount {
+interface adminAccount {
   id: number;
   email: string;
   username: string;
-  firstname: string;
+  firstname: string; 
   lastname: string;
 }
 
@@ -26,7 +26,7 @@ export function Admins() {
       .then(data => setAdmins(data))
       .catch(err => console.error(err));
   }, []);
-
+  
   // Submit new admin
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,11 +76,11 @@ export function Admins() {
     }
   };
   return (
-    <div className="p-4 border rounded-lg mb-6 shadow-sm bg-white text-gray-800">
+    <div className="p-4 border rounded-lg mb-6 shadow-sm bg-white text-grey-800">
       <div className="flex justify-between items-center mb-3">
         <h2 className="text-xl font-bold">Admin Accounts</h2>
         <button
-          className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
+          className="bg-blue-600 hover:bg-blue-800 text-white px-3 py-1 rounded"
           onClick={() => setShowForm(true)}
         >
           + Add Admin
@@ -94,15 +94,16 @@ export function Admins() {
             <p><span className="font-semibold">Name:</span> {a.firstname} {a.lastname}</p>
             <p><span className="font-semibold">Email:</span> {a.email}</p>
             <p><span className="font-semibold">Username:</span> {a.username}</p>
+
             <div className="mt-2 flex gap-2">
               <button
-                className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded text-sm"
+                className="bg-yellow-500 hover:bg-yellow-800 text-white px-2 py-1 rounded text-sm"
                 onClick={() => handleUpdate(a.id)}
               >
                 Edit
               </button>
               <button
-                className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded text-sm"
+                className="bg-red-600 hover:bg-red-800 text-white px-2 py-1 rounded text-sm"
                 onClick={() => handleDelete(a.id)}
               >
                 Delete
@@ -167,6 +168,9 @@ export function Admins() {
                   className="px-3 py-1 bg-blue-600 text-white rounded"
                 >
                   Save
+                </button>
+                <button>
+                  
                 </button>
               </div>
             </form>
