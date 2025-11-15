@@ -12,6 +12,7 @@ export default function DashboardLayout({
 
         <nav className="flex flex-col space-y-2">
           <Link href="/dashboard">Dashboard</Link>
+          <Link href="/dashboard/InteractiveMotorDesign">Motorcycle Customization</Link>
           <Link href="/dashboard/Appointment">Appointment</Link>
           <Link href="/dashboard/CustomerPage">Customer</Link>
           <Link href="/dashboard/Inventory">Inventory</Link>
