@@ -1,3 +1,4 @@
+/*
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -88,7 +89,7 @@ export function Admins() {
         </button>
       </div>
 
-      {/* List */}
+      {// List }
       <ul className="space-y-2">
         {admins.map(a => (
           <li key={a.id} className="border p-3 rounded hover:bg-gray-50 transition">
@@ -115,7 +116,7 @@ export function Admins() {
         ))}
       </ul>
 
-      {/* Popup Modal */}
+      {// Popup Modal }
       {showForm && (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg w-96">
@@ -184,10 +185,61 @@ export function Admins() {
 
 export default function UserAccessManagementPage() {
   return (
-    /*CREATE BUTTON FOR CRUDE CREATE, DELETE, UPDATE*/
+    //CREATE BUTTON FOR CRUDE CREATE, DELETE, UPDATE
     <div className="p-6 bg-gray-100 min-h-screen text-gray-800">
       <h1 className="text-2xl font-bold mb-6">User Access Management</h1>
       <Admins />
+    </div>
+  );
+}
+*/
+"use client";
+import { useState } from "react";
+import { Admins } from "./Admins";
+import { Receptionists } from "./Receptionists";
+import { Mechanics } from "./Mechanics";
+
+export default function UserAccessManagementPage() {
+  const [tab, setTab] = useState("admin");
+
+  return (
+    <div className="p-6 bg-gray-100 min-h-screen text-gray-800">
+      <h1 className="text-2xl font-bold mb-6">User Access Management</h1>
+
+      {/* 🔹 Tabs */}
+      <div className="flex gap-3 mb-6">
+        <button
+          className={`px-4 py-2 rounded border 
+            ${tab === "admin" ? "bg-blue-600 text-white" : "bg-white"}
+          `}
+          onClick={() => setTab("admin")}
+        >
+          Admins
+        </button>
+
+        <button
+          className={`px-4 py-2 rounded border 
+            ${tab === "receptionist" ? "bg-blue-600 text-white" : "bg-white"}
+          `}
+          onClick={() => setTab("receptionist")}
+        >
+          Receptionists
+        </button>
+
+        <button
+          className={`px-4 py-2 rounded border 
+            ${tab === "mechanic" ? "bg-blue-600 text-white" : "bg-white"}
+          `}
+          onClick={() => setTab("mechanic")}
+        >
+          Mechanics
+        </button>
+      </div>
+
+      {/* 🔹 Render Selected Tab */}
+      {tab === "admin" && <Admins />}
+      {tab === "receptionist" && <Receptionists />}
+      {tab === "mechanic" && <Mechanics />}
     </div>
   );
 }
