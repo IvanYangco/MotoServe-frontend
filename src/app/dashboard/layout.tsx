@@ -24,12 +24,12 @@ export default function DashboardLayout({
         <nav className="flex flex-col space-y-2">
           <Link href="/dashboard" className={linkClass("/dashboard")}>Dashboard</Link>
           <Link href="/dashboard/InteractiveMotorDesign" className={linkClass("/dashboard/InteractiveMotorDesign")}>Motorcycle Customization</Link>
-          <Link href="/dashboard/Appointment" className={linkClass("/dashboard/Appointment")}>Appointment</Link>
           <Link href="/dashboard/CustomerPage" className={linkClass("/dashboard/CustomerPage")}>Customer</Link>
-          <Link href="/dashboard/Inventory" className={linkClass("/dashboard/Inventory")}>Inventory</Link>
           <Link href="/dashboard/JobOrder" className={linkClass("/dashboard/JobOrder")}>Job Order</Link>
-          <Link href="/dashboard/MaintenanceHistory" className={linkClass("/dashboard/MaintenanceHistory")}>Maintenance</Link>
+          <Link href="/dashboard/Appointment" className={linkClass("/dashboard/Appointment")}>Appointment</Link>
           <Link href="/dashboard/Payment" className={linkClass("/dashboard/Payment")}>Payment</Link>
+          <Link href="/dashboard/MaintenanceHistory" className={linkClass("/dashboard/MaintenanceHistory")}>Maintenance</Link>
+           <Link href="/dashboard/Inventory" className={linkClass("/dashboard/Inventory")}>Inventory</Link>
           <Link href="/dashboard/Report" className={linkClass("/dashboard/Report")}>Report</Link>
           <Link href="/dashboard/UserAccessManagement" className={linkClass("/dashboard/UserAccessManagement")}>User Access Management</Link>
         </nav>

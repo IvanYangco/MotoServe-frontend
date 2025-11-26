@@ -106,81 +106,101 @@ export default function AppointmentPage() {
   };
 
   return (
-    <div className="p-6 space-y-6 text-gray-800">
-      <h1 className="text-3xl font-bold">Appointment</h1>
+    <div
+      className="min-h-screen p-6 space-y-6 text-white bg-cover bg-fixed bg-center relative"
+      style={{
+        backgroundImage: `url('/appointmentbg.png')`,
+      }}
+    >
+      {/* Background Overlay for better text readability and consistent dark theme */}
+      <div className="absolute inset-0 bg-slate-900 opacity-80 z-0" />
 
-      {/* FORM */}
-      <div className="bg-white p-6 rounded-lg shadow space-y-4">
-        <h2 className="text-xl font-semibold">Create Schedule</h2>
+      {/* Content wrapper with higher Z-index */}
+      <div className="relative z-10">
+        <h1 className="text-3xl font-bold">Appointment</h1>
 
-        <DatePicker
-          selected={selectedDate}
-          onChange={setSelectedDate}
-          className="border p-2 rounded w-full"
-          placeholderText="Select Date"
-        />
+        {/* FORM - Updated to blend with background */}
+        <div className="bg-slate-800/70 p-6 rounded-lg shadow-lg space-y-4 text-white border border-slate-700"> {/* Changed bg-white to bg-slate-800/70, text to white */}
+          <h2 className="text-xl font-semibold">Create Schedule</h2>
 
-        <select className="border p-2 rounded w-full" onChange={(e) => setMechanicId(Number(e.target.value))}>
-          <option value={0}>Select Mechanic</option>
-          {mechanics.map(m => (
-            <option key={m.mechanicId} value={m.mechanicId}>
-              {m.firstname} {m.lastname}
-            </option>
-          ))}
-        </select>
+          <DatePicker
+            selected={selectedDate}
+            onChange={setSelectedDate}
+            className="border p-2 rounded w-full bg-slate-700 text-white border-slate-600 placeholder-slate-400" // Styled DatePicker input
+            placeholderText="Select Date"
+            calendarClassName="bg-slate-700 text-white border-slate-600" // Style for the calendar dropdown itself
+            dayClassName={(date) =>
+              date.getDay() === 0 || date.getDay() === 6 ? "text-red-300" : "" // <-- FIX APPLIED HERE: Changed undefined to ""
+            }
+            popperPlacement="bottom-start" // Adjust placement if needed
+          />
 
-        <input
-          type="time"
-          className="border p-2 rounded w-full"
-          disabled={!mechanicId || !selectedDate}
-          onChange={(e) => setTime(e.target.value)}
-          list="time-list"
-        />
+          <select
+            className="border p-2 rounded w-full bg-slate-700 text-white border-slate-600" // Styled select input
+            onChange={(e) => setMechanicId(Number(e.target.value))}
+            value={mechanicId} // Ensure controlled component
+          >
+            <option value={0}>Select Mechanic</option>
+            {mechanics.map(m => (
+              <option key={m.mechanicId} value={m.mechanicId}>
+                {m.firstname} {m.lastname}
+              </option>
+            ))}
+          </select>
 
-        <datalist id="time-list">
-          {Array.from({ length: 10 }, (_, i) => {
-            const hour = 8 + i;
-            const timeStr = `${hour.toString().padStart(2, "0")}:00`;
-            return bookedTimes.includes(timeStr) ? null : (
-              <option key={timeStr} value={timeStr} />
-            );
-          })}
-        </datalist>
+          <input
+            type="time"
+            className="border p-2 rounded w-full bg-slate-700 text-white border-slate-600" // Styled time input
+            disabled={!mechanicId || !selectedDate}
+            onChange={(e) => setTime(e.target.value)}
+            list="time-list"
+            value={time} // Ensure controlled component
+          />
 
-        <button onClick={createSchedule} className="bg-blue-600 text-white px-4 py-2 rounded">
-          Create Appointment
-        </button>
+          <datalist id="time-list">
+            {Array.from({ length: 10 }, (_, i) => {
+              const hour = 8 + i;
+              const timeStr = `${hour.toString().padStart(2, "0")}:00`;
+              return bookedTimes.includes(timeStr) ? null : (
+                <option key={timeStr} value={timeStr} />
+              );
+            })}
+          </datalist>
 
-        {message && <p className="text-red-600 mt-2">{message}</p>}
+          <button onClick={createSchedule} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+            Create Appointment
+          </button>
+
+          {message && <p className="text-red-400 mt-2">{message}</p>} {/* Adjusted message color */}
+        </div>
+
+        {/* 📋 SHOW SCHEDULES - Updated to blend with background */}
+        <div>
+          <h2 className="text-xl font-semibold text-white mt-8">Current Appointments</h2>
+          <table className="min-w-full mt-4 bg-slate-800/70 rounded shadow-lg text-white border border-slate-700"> {/* Changed bg-white to bg-slate-800/70, text to white */}
+            <thead>
+              <tr className="bg-slate-700 text-center text-slate-200"> {/* Darker header */}
+                <th className="p-3">Date</th>
+                <th className="p-3">Time</th>
+                <th className="p-3">Mechanic</th>
+              </tr>
+            </thead>
+            <tbody>
+              {schedules.map((s, index) => (
+                <tr key={s.scheduleId || index} className="border-t border-slate-700 text-center hover:bg-slate-700/50 transition-colors"> {/* Darker border, hover effect */}
+                  <td className="p-3">{s.date}</td>
+                  <td className="p-3">{s.time}</td>
+                  <td className="p-3 font-medium">
+                    {s.mechanic
+                      ? `${s.mechanic.firstname} ${s.mechanic.lastname}`
+                      : "—"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-
-      {/* 📋 SHOW SCHEDULES */}
-<div>
-  <h2 className="text-xl font-semibold">Current Appointments</h2>
-  <table className="min-w-full mt-4 bg-white rounded shadow text-gray-800">
-    <thead>
-      <tr className="bg-gray-200 text-center">
-        <th className="p-3">Date</th>
-        <th className="p-3">Time</th>
-        <th className="p-3">Mechanic</th>
-      </tr>
-    </thead>
-    <tbody>
-      {schedules.map((s, index) => (
-        <tr key={s.scheduleId || index} className="border-t text-center">
-          <td className="p-3">{s.date}</td>
-          <td className="p-3">{s.time}</td>
-          <td className="p-3 font-medium">
-            {s.mechanic
-              ? `${s.mechanic.firstname} ${s.mechanic.lastname}`
-              : "—"}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
     </div>
   );
 }

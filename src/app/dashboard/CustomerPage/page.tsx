@@ -12,23 +12,23 @@ const [formData, setFormData] = useState({
   Username: "",
   Password: "",
   PhoneNumber: "",
-  Motorcycle: "",     // 🔥 NEW
-  PlateNumber: "",    // 🔥 NEW
+  Motorcycle: "",     
+  PlateNumber: "",  
 });
 
-  // 📌 Fetch customers
+  //  Fetch customers
   useEffect(() => {
     fetch("http://localhost:5043/api/customerAccounts")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
 
-  // 📌 Handle input change
+  //  Handle input change
   const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // 📌 CREATE customer
+  //  CREATE customer
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const res = await fetch(
@@ -58,7 +58,7 @@ const [formData, setFormData] = useState({
     }
   };
 
-  // 📌 UPDATE customer
+  //  UPDATE customer
   const handleUpdate = async (id: number) => {
     const updatedData = {
       Firstname: prompt("New Firstname:"),
@@ -79,7 +79,7 @@ const [formData, setFormData] = useState({
     setUsers(updated);
   };
 
-  // 📌 DELETE customer
+  //  DELETE customer
   const handleDelete = async (id: number) => {
     if (!confirm("Delete this customer?")) return;
 
@@ -106,6 +106,7 @@ const [formData, setFormData] = useState({
 <table className="w-full border-collapse text-left">
   <thead className="bg-gray-100">
     <tr>
+      <th className="p-2 border">Customer ID</th>
       <th className="p-2 border">Lastname</th>
       <th className="p-2 border">Email</th>
       <th className="p-2 border">Phone</th>
@@ -125,6 +126,7 @@ const [formData, setFormData] = useState({
     ) : (
       users.map((u: any) => (
         <tr key={u.id} className="border hover:bg-gray-50 transition">
+          <td className="p-2 font-bold text-blue-600">{u.id}</td> 
           <td className="p-2">{u.lastname}</td>
           <td className="p-2">{u.email}</td>
           <td className="p-2">{u.phone_number || "N/A"}</td>

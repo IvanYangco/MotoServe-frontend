@@ -34,7 +34,7 @@ export default function DashboardPage() {
   return (
     <div
       className="min-h-screen w-full bg-center bg-cover relative"
-      style={{ backgroundImage: "url('/wrench1.png')" }}
+      style={{ backgroundImage: "url('/dbbg.png')" }}
     >
       {/* Overlay */}
       <div className="bg-black/50 backdrop-blur-md min-h-screen w-full">
