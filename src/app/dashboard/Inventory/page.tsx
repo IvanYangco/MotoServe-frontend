@@ -26,7 +26,14 @@ export default function InventoryPage() {
       .then((data) => setInventory(data));
   }, []);
 
-  // CREATE ITEM
+  // DELETE ITEM
+  const deleteItem = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this item?")) return;
+    await fetch(`http://localhost:5043/api/Inventory/${id}`, { method: "DELETE" });
+    location.reload();
+  };
+
+  // CREATE INVENTORY ITEM
   const createInventoryItem = async () => {
     await fetch("http://localhost:5043/api/Inventory", {
       method: "POST",
@@ -38,18 +45,7 @@ export default function InventoryPage() {
     location.reload();
   };
 
-  // DELETE ITEM
-  const deleteItem = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this item?")) return;
-
-    await fetch(`http://localhost:5043/api/Inventory/${id}`, {
-      method: "DELETE",
-    });
-
-    location.reload();
-  };
-
-  // UPDATE QUANTITY (PUT API)
+  // UPDATE QUANTITY (+ - Button)
   const updateQuantity = async (id: number, newQty: number) => {
     const item = inventory.find((i) => i.id === id);
     if (!item) return;
@@ -59,9 +55,23 @@ export default function InventoryPage() {
     await fetch(`http://localhost:5043/api/Inventory/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedItem)
+      body: JSON.stringify(updatedItem),
     });
 
+    location.reload();
+  };
+
+  // UPDATE ITEM (FROM MODAL)
+  const updateItem = async () => {
+    if (!editItem) return;
+
+    await fetch(`http://localhost:5043/api/Inventory/${editItem.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(editItem),
+    });
+
+    setEditModal(false);
     location.reload();
   };
 
@@ -74,7 +84,7 @@ export default function InventoryPage() {
       <div className="flex justify-between bg-slate-800/40 backdrop-blur-md p-4 rounded-lg border border-white/10 shadow-lg">
         <h1 className="text-3xl font-bold">Inventory</h1>
         <button
-          className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-md shadow-md transition"
+          className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-2 rounded-md shadow-md transition"
           onClick={() => setShowModal(true)}
         >
           + Add Material
@@ -118,7 +128,7 @@ export default function InventoryPage() {
                   </button>
                 </td>
 
-                {/* RIGHT ALIGN PRICE — GREEN TEXT */}
+                {/* PRICE */}
                 <td className="px-4 py-2 text-right font-semibold text-green-400">
                   ₱{item.price.toLocaleString()}
                 </td>
@@ -126,7 +136,7 @@ export default function InventoryPage() {
                 {/* ACTION BUTTONS */}
                 <td className="px-4 py-2 text-center space-x-2">
                   <button
-                    className="bg-yellow-600 hover:bg-yellow-700 px-3 py-1 rounded"
+                    className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded"
                     onClick={() => {
                       setEditItem(item);
                       setEditModal(true);
@@ -147,8 +157,80 @@ export default function InventoryPage() {
         </table>
       </div>
 
-      {/* MODALS BELOW... (REMAIN THE SAME) */}
-      {/* ... */}
+      {/* ADD MATERIAL MODAL */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg w-96 text-gray-700">
+            <h2 className="text-lg font-bold mb-4">Add Inventory Item</h2>
+
+            <input
+              className="border p-2 w-full rounded mb-3"
+              placeholder="Material"
+              onChange={(e) => setNewItem({ ...newItem, material: e.target.value })}
+            />
+            <input
+              className="border p-2 w-full rounded mb-3"
+              type="number"
+              placeholder="Quantity"
+              onChange={(e) => setNewItem({ ...newItem, quantity: Number(e.target.value) })}
+            />
+            <input
+              className="border p-2 w-full rounded mb-3"
+              type="number"
+              placeholder="Price"
+              onChange={(e) => setNewItem({ ...newItem, price: Number(e.target.value) })}
+            />
+
+            <div className="flex justify-end gap-2">
+              <button className="bg-gray-400 px-3 py-1 rounded" onClick={() => setShowModal(false)}>
+                Cancel
+              </button>
+              <button className="bg-blue-600 text-white px-3 py-1 rounded" onClick={createInventoryItem}>
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* EDIT MATERIAL MODAL */}
+      {editModal && editItem && (
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg w-96 text-gray-700">
+            <h2 className="text-lg font-bold mb-4">Edit Material</h2>
+
+            <input
+              className="border p-2 w-full rounded mb-3"
+              value={editItem.material}
+              onChange={(e) => setEditItem({ ...editItem, material: e.target.value })}
+            />
+            <input
+              className="border p-2 w-full rounded mb-3"
+              type="number"
+              value={editItem.quantity}
+              onChange={(e) => setEditItem({ ...editItem, quantity: Number(e.target.value) })}
+            />
+            <input
+              className="border p-2 w-full rounded mb-3"
+              type="number"
+              value={editItem.price}
+              onChange={(e) => setEditItem({ ...editItem, price: Number(e.target.value) })}
+            />
+
+            <div className="flex justify-end gap-2">
+              <button className="bg-gray-400 px-3 py-1 rounded" onClick={() => setEditModal(false)}>
+                Cancel
+              </button>
+              <button
+                className="bg-blue-600 text-white px-3 py-1 rounded"
+                onClick={updateItem}
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

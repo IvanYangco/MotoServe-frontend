@@ -167,7 +167,7 @@ export default function AppointmentPage() {
             })}
           </datalist>
 
-          <button onClick={createSchedule} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+          <button onClick={createSchedule} className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 transition-colors">
             Create Appointment
           </button>
 

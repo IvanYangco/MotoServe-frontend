@@ -76,7 +76,7 @@ export function Admins() {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">Admin Accounts</h2>
           <button
-            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded shadow-md"
+            className="bg-yellow-500 hover:bg-yellow-700 text-white px-3 py-1 rounded shadow-md"
             onClick={() => setShowForm(true)}
           >
             + Add Admin
@@ -101,7 +101,7 @@ export function Admins() {
                 <td className="space-x-2">
                  <button
   onClick={() => handleUpdate(a.id)}
-  className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded"
+  className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded"
 >
   Edit
 </button>

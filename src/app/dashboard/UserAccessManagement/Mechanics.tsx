@@ -82,7 +82,7 @@ export function Mechanics() {
       <div className="p-4 border rounded-lg mb-6 shadow-lg bg-slate-800/40 backdrop-blur-md border-white/10">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">Mechanic Accounts</h2>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded" onClick={() => setShowForm(true)}>
+          <button className="bg-yellow-500 hover:bg-yellow-700 text-white px-3 py-1 rounded" onClick={() => setShowForm(true)}>
             + Add Mechanic
           </button>
         </div>
@@ -103,7 +103,7 @@ export function Mechanics() {
                 <td>{m.phoneNumber}</td>
                 <td>{m.motorExpertise}</td>
                 <td className="space-x-2">
-                  <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded" onClick={() => handleUpdate(m.mechanicId)}>Edit</button>
+                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded" onClick={() => handleUpdate(m.mechanicId)}>Edit</button>
                   <button className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded" onClick={() => handleDelete(m.mechanicId)}>Delete</button>
                 </td>
               </tr>

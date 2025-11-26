@@ -204,7 +204,7 @@ export default function UserAccessManagementPage() {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen text-gray-800">
-      <h1 className="text-2xl font-bold mb-6">User Access Management</h1>
+      <h1 className="text-2xl font-bold mb-6">Role Distribution System</h1>
 
       {/* 🔹 Tabs */}
       <div className="flex gap-3 mb-6">

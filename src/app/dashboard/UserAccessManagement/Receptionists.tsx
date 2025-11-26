@@ -72,7 +72,7 @@ export function Receptionists() {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">Receptionist Accounts</h2>
           <button
-            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded shadow-md"
+            className="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded shadow-md"
             onClick={() => setShowForm(true)}
           >
             + Add Receptionist
@@ -98,7 +98,7 @@ export function Receptionists() {
                 <td>{r.email}</td>
                 <td>{r.username}</td>
                 <td className="space-x-2">
-                  <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded" onClick={() => handleUpdate(r.id)}>Edit</button>
+                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded" onClick={() => handleUpdate(r.id)}>Edit</button>
                   <button className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded" onClick={() => handleDelete(r.id)}>Delete</button>
                 </td>
               </tr>

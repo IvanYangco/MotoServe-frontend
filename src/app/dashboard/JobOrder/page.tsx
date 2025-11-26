@@ -67,42 +67,34 @@ export default function MaintenanceTypePage() {
       <div className="flex justify-between bg-slate-800/40 backdrop-blur-md p-4 rounded-lg border border-white/10 shadow-md">
         <h1 className="text-3xl font-bold">Job Order</h1>
         <button
-          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md shadow-md transition"
+          className="bg-yellow-500 hover:bg-yellow-700 text-white px-5 py-2 rounded-md shadow-md transition"
           onClick={() => setShowModal(true)}
         >
           + Add Service
         </button>
       </div>
 
-      {/* Table */}
-      <div className="bg-slate-800/40 backdrop-blur-md rounded-lg shadow-lg overflow-hidden border border-white/10">
-        <table className="min-w-full table-auto text-gray-200">
-          <thead className="bg-slate-700/50 text-gray-300 text-sm">
-            <tr>
-              <th className="px-4 py-2">Service</th>
-              <th className="px-4 py-2">Description</th>
-              <th className="px-4 py-2">Price</th>
-              <th className="px-4 py-2">Mechanic</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {types.map((t) => (
-              <tr
-                key={t.maintenanceId}
-                className="border-t border-white/10 hover:bg-slate-700/30 transition"
-              >
-                <td className="px-4 py-2">{t.maintenanceName}</td>
-                <td className="px-4 py-2">{t.description}</td>
-                <td className="px-4 py-2">₱{t.basePrice}</td>
-                <td className="px-4 py-2">
-                  {t.mechanic ? `${t.mechanic.firstname} ${t.mechanic.lastname}` : "—"}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+     {/* Table */}
+<div className="bg-slate-800/40 backdrop-blur-md rounded-lg shadow-lg overflow-hidden border border-white/10">
+  <table className="min-w-full table-auto text-gray-200">
+    <thead className="bg-slate-700/50 text-gray-300">
+      <tr>
+        <th className="px-4 py-2 w-1/4 text-left">Service</th>
+        <th className="px-4 py-2 w-1/2 text-left">Description</th>
+        <th className="px-4 py-2 w-1/4 text-left">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {types.map((t) => (
+        <tr key={t.maintenanceId} className="border-t border-white/10 hover:bg-slate-700/30 transition">
+          <td className="px-4 py-2">{t.maintenanceName}</td>
+          <td className="px-4 py-2">{t.description}</td>
+          <td className="px-4 py-2">₱{t.basePrice}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
       {/* Modal */}
       {showModal && (
