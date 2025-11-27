@@ -160,30 +160,30 @@ export function UserAccounts() {
       </table>
 
       {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
-            <h3 className="text-lg font-bold mb-3">Add Customer</h3>
-            <form onSubmit={handleSubmit} className="space-y-2">
-              <input name="Firstname" placeholder="First Name" className="input" onChange={handleChange} />
-              <input name="Lastname" placeholder="Last Name" className="input" onChange={handleChange} />
-              <input name="Username" placeholder="Username" className="input" onChange={handleChange} />
-              <input name="Email" type="email" placeholder="Email" className="input" onChange={handleChange} />
-              <input name="Password" type="password" placeholder="Password" className="input" onChange={handleChange} />
-              <input name="PhoneNumber" placeholder="Phone Number" className="input" onChange={handleChange} />
-              <input name="Motorcycle" placeholder="Motorcycle" className="input" onChange={handleChange} />
-              <input name="PlateNumber" placeholder="Plate Number" className="input" onChange={handleChange} />
+     {isModalOpen && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
+      <h3 className="text-lg font-bold mb-3">Add Customer</h3>
+      <form onSubmit={handleSubmit} className="space-y-2">
+        <input name="Firstname" placeholder="First Name" className="input" onChange={handleChange} />
+        <input name="Lastname" placeholder="Last Name" className="input" onChange={handleChange} />
+        <input name="Username" placeholder="Username" className="input" onChange={handleChange} />
+        <input name="Email" type="email" placeholder="Email" className="input" onChange={handleChange} />
+        <input name="Password" type="password" placeholder="Password" className="input" onChange={handleChange} />
+        <input name="PhoneNumber" placeholder="Phone Number" className="input" onChange={handleChange} />
+        <input name="Motorcycle" placeholder="Motorcycle" className="input" onChange={handleChange} />
+        <input name="PlateNumber" placeholder="Plate Number" className="input" onChange={handleChange} />
 
-              <div className="flex justify-end gap-2 pt-4">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-3 py-1 border rounded">
-                  Cancel
-                </button>
-                <button type="submit" className="bg-blue-600 px-3 py-1 text-white rounded">Save</button>
-              </div>
-            </form>
-          </div>
+        <div className="flex justify-end gap-2 pt-4">
+          <button type="button" onClick={() => setIsModalOpen(false)} className="px-3 py-1 border rounded">
+            Cancel
+          </button>
+          <button type="submit" className="bg-blue-600 px-3 py-1 text-white rounded">Save</button>
         </div>
-      )}
+      </form>
+    </div>
+  </div>
+)}
     </div>
   );
 }

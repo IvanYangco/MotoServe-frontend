@@ -174,32 +174,38 @@ export default function AppointmentPage() {
           {message && <p className="text-red-400 mt-2">{message}</p>} {/* Adjusted message color */}
         </div>
 
-        {/* 📋 SHOW SCHEDULES - Updated to blend with background */}
-        <div>
-          <h2 className="text-xl font-semibold text-white mt-8">Current Appointments</h2>
-          <table className="min-w-full mt-4 bg-slate-800/70 rounded shadow-lg text-white border border-slate-700"> {/* Changed bg-white to bg-slate-800/70, text to white */}
-            <thead>
-              <tr className="bg-slate-700 text-center text-slate-200"> {/* Darker header */}
-                <th className="p-3">Date</th>
-                <th className="p-3">Time</th>
-                <th className="p-3">Mechanic</th>
-              </tr>
-            </thead>
-            <tbody>
-              {schedules.map((s, index) => (
-                <tr key={s.scheduleId || index} className="border-t border-slate-700 text-center hover:bg-slate-700/50 transition-colors"> {/* Darker border, hover effect */}
-                  <td className="p-3">{s.date}</td>
-                  <td className="p-3">{s.time}</td>
-                  <td className="p-3 font-medium">
-                    {s.mechanic
-                      ? `${s.mechanic.firstname} ${s.mechanic.lastname}`
-                      : "—"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      {/* 📋 SHOW SCHEDULES */}
+<div>
+  <h2 className="text-xl font-semibold text-white mt-8">Current Appointments</h2>
+
+  <table className="min-w-full mt-4 bg-slate-800/70 rounded shadow-lg text-white border border-slate-700">
+    <thead>
+      <tr className="bg-slate-700 text-center text-slate-200">
+        <th className="p-3">Date</th>
+        <th className="p-3">Time</th>
+        <th className="p-3">Mechanic</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {schedules.map((s, index) => (
+        <tr
+          key={s.scheduleId || index}
+          className="border-t border-slate-700 text-center hover:bg-slate-700/50 transition-colors"
+        >
+          <td className="p-3">{s.date}</td>
+          <td className="p-3">{s.time}</td>
+          <td className="p-3 font-medium">
+            {s.mechanic
+              ? `${s.mechanic.firstname} ${s.mechanic.lastname}`
+              : "—"}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
       </div>
     </div>
   );
